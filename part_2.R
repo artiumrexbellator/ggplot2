@@ -48,5 +48,7 @@ plot(data$ESCS,data$PV1MATH,data=Austrialia)+
   geom_smooth(method = "lm")+
   labs(x = "ESCS", y = "Math Scores") +
   theme_bw() +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank())+
+  facet_grid(. ~ region)
 
+  
