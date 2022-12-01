@@ -23,7 +23,17 @@ ggplot(data=data,mapping = aes(x=reorder(CNT,JOYSCIE),y=JOYSCIE))+geom_boxplot()
   stat_summary(fun.y=mean, geom="point", shape=20, size=6, color="red", fill="red")+
   geom_hline(yintercept = 0)
 #question 7
-ggplot(data=data,mapping = aes(x=reorder(CNT,JOYSCIE),y=JOYSCIE,fill=Region))+geom_boxplot()+
+
+region <- (sapply(data$CNT, function(x) {
+  if(x %in% c("Canada", "United States", "Mexico")) "N. America"
+  else if (x %in% c("Colombia", "Brazil", "Uruguay")) "S. America"
+  else if (x %in% c("Japan", "B-S-J-G (China)", "Korea")) "Asia"
+  else if (x %in% c("Germany", "Italy", "France")) "Europe"
+  else if (x %in% c("Australia", "New Zealand")) "Australia"
+  else if (x %in% c("Israel", "Jordan", "Lebanon")) "Middle-East"
+}))
+
+ggplot(data=data,mapping = aes(x=reorder(CNT,JOYSCIE),y=JOYSCIE,fill=region))+geom_boxplot()+
   labs(x=NULL,y="Science enjoyment scores")+theme_bw()+coord_flip()+
   stat_summary(fun.y=mean, geom="point", shape=20, size=6, color="red", fill="red")+
   geom_hline(yintercept = 0)
